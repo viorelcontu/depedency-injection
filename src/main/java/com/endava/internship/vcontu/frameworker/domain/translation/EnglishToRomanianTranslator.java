@@ -1,8 +1,8 @@
-package com.endava.internship.vcontu.frameworker.domain;
+package com.endava.internship.vcontu.frameworker.domain.translation;
 
 import com.endava.internship.vcontu.frameworker.domain.model.OriginalStory;
 
-public class Translator {
+public class EnglishToRomanianTranslator implements Translator {
 
     public String translate(final OriginalStory story) {
         final String originalMessage = story.getOriginalMessage();

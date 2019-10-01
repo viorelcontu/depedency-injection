@@ -1,8 +1,8 @@
-package com.endava.internship.vcontu.frameworker.domain;
+package com.endava.internship.vcontu.frameworker.domain.publishing;
 
 import com.endava.internship.vcontu.frameworker.domain.model.OriginalStory;
 
-public class Publisher {
+public class ConsolePublisher implements Publisher {
 
     public void publish (final OriginalStory story, final String translatedStory) {
         publishToConsole(story, translatedStory);

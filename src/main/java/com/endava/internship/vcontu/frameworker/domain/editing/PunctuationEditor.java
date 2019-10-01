@@ -1,6 +1,6 @@
-package com.endava.internship.vcontu.frameworker.domain;
+package com.endava.internship.vcontu.frameworker.domain.editing;
 
-public class Editor {
+public class PunctuationEditor implements Editor {
 
     public String editStory(final String message) {
 

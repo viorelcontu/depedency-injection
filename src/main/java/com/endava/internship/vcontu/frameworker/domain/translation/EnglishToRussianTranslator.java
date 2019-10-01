@@ -18,4 +18,9 @@ public class EnglishToRussianTranslator implements Translator {
                 return "Молдавия - история успеха";
         }
     }
+
+    @Override
+    public String introductionMessage(String author) {
+        return "Новая новость для вас от автора: " + author;
+    }
 }

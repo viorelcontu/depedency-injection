@@ -18,4 +18,9 @@ public class EnglishToRomanianTranslator implements Translator {
                 return "Moldova - istorie de succes";
         }
     }
+
+    @Override
+    public String introductionMessage(String author) {
+        return "Avem o noutate noua pentru dumneavoastra de la autorul: " + author;
+    }
 }

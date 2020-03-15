@@ -1,5 +1,8 @@
 package com.endava.internship.vcontu.frameworker.domain.editing;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PunctuationEditor implements Editor {
 
     public String editStory(final String message) {

@@ -1,7 +1,9 @@
 package com.endava.internship.vcontu.frameworker.domain.translation;
 
 import com.endava.internship.vcontu.frameworker.domain.model.OriginalStory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EnglishToRussianTranslator implements Translator {
 
     public String translate(final OriginalStory story) {

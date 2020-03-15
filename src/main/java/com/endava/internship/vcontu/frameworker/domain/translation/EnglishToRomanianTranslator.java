@@ -1,7 +1,11 @@
 package com.endava.internship.vcontu.frameworker.domain.translation;
 
 import com.endava.internship.vcontu.frameworker.domain.model.OriginalStory;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
+@Component
+@Primary
 public class EnglishToRomanianTranslator implements Translator {
 
     public String translate(final OriginalStory story) {

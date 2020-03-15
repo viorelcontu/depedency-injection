@@ -1,15 +1,14 @@
 package com.endava.internship.vcontu.frameworker;
 
-import com.endava.internship.vcontu.frameworker.domain.context.ApplicationContext;
-import com.endava.internship.vcontu.frameworker.domain.context.AutomaticApplicationContext;
-import com.endava.internship.vcontu.frameworker.domain.context.ManualApplicationContext;
-import com.endava.internship.vcontu.frameworker.domain.editing.PunctuationEditor;
 import com.endava.internship.vcontu.frameworker.domain.model.OriginalStory;
-import com.endava.internship.vcontu.frameworker.domain.news.LocalNewsMaker;
 import com.endava.internship.vcontu.frameworker.domain.news.NewsMaker;
-import com.endava.internship.vcontu.frameworker.domain.publishing.ConsolePublisher;
-import com.endava.internship.vcontu.frameworker.domain.translation.EnglishToRomanianTranslator;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
+@ComponentScan
 public class Main {
 
     public static final String GOOD_NEWS = "good news";
@@ -19,35 +18,19 @@ public class Main {
     public static final String ORIGINAL_STORY_GREETING = "Original story (english): ";
 
     public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
 
-        final NewsMaker romanianNewsMaker = buildRomanianNewsMaker();
+        final NewsMaker romanianNewsMaker = context.getBean("localNewsMaker",NewsMaker.class);
         final OriginalStory originalStory1 = new OriginalStory(GOOD_NEWS, BILL_WOODS_AUTHOR);
         greeting(originalStory1);
         romanianNewsMaker.processStory(originalStory1);
 
         System.out.println("------------\n");
 
-        final NewsMaker russianNewsMaker = buildRussianNewsMaker();
+        final NewsMaker russianNewsMaker = context.getBean("localNewsMaker",NewsMaker.class);
         final OriginalStory originalStory2 = new OriginalStory(HELLO_NEWS, JOHN_DOE_AUTHOR);
         greeting(originalStory2);
         russianNewsMaker.processStory(originalStory2);
-    }
-
-    //Set-up the english to romanian newsmaker
-    private static NewsMaker buildRomanianNewsMaker() {
-        ApplicationContext englishContext = new AutomaticApplicationContext(
-                EnglishToRomanianTranslator.class,
-                PunctuationEditor.class,
-                ConsolePublisher.class,
-                LocalNewsMaker.class);
-
-        return englishContext.getBean(LocalNewsMaker.class);
-    }
-
-    //Set-up the english to russian newsmaker
-    private static NewsMaker buildRussianNewsMaker() {
-        ApplicationContext russianContext = new ManualApplicationContext();
-        return russianContext.getBean(LocalNewsMaker.class);
     }
 
     private static void greeting(final OriginalStory story) {

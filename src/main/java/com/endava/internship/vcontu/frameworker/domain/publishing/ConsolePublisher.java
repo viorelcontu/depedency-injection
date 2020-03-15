@@ -3,9 +3,11 @@ package com.endava.internship.vcontu.frameworker.domain.publishing;
 import com.endava.internship.vcontu.frameworker.domain.model.OriginalStory;
 import com.endava.internship.vcontu.frameworker.domain.translation.Translator;
 
+import static java.util.Optional.ofNullable;
+
 public class ConsolePublisher implements Publisher {
 
-    private final Translator translator;
+    private Translator translator;
 
     public ConsolePublisher(Translator translator) {
         this.translator = translator;
@@ -16,7 +18,11 @@ public class ConsolePublisher implements Publisher {
     }
 
     private void publishToConsole(final OriginalStory story, final String translatedStory) {
-        System.out.println(translator.introductionMessage(story.getAuthor()));
+        final String introductoryMessage = ofNullable(translator)
+                .map(t -> t.introductionMessage(story.getAuthor()))
+                .orElse("");
+
+        System.out.println(introductoryMessage);
         System.out.println(translatedStory);
     }
 }
